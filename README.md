@@ -1,4 +1,4 @@
-#  Árvore Binária de Busca (BST) em Java
+#  Árvore Binária de Busca (BST) em Java 🌲
 
 ##  Sobre o Projeto
 
