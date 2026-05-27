@@ -13,7 +13,7 @@ public class ArvoreBinaria {
         while(atual.getEsquerda() != null) {
             atual = atual.getEsquerda();
         }
-        return atual.getChave();
+        return atual.getConteudo();
     }
 
     public int getValorMax(No no) {
@@ -21,55 +21,56 @@ public class ArvoreBinaria {
         while(atual.getDireita() != null) {
             atual = atual.getDireita();
         }
-        return atual.getChave();
+        return atual.getConteudo();
     }
 
-    public void inserir(int chave) {
-        raiz = inserir(raiz, chave);
+    public void inserir(int conteudo) {
+        raiz = inserirPriv(raiz, conteudo);
     }
 
-    public No encontrar(int chave) {
-        return encontrar(raiz, chave);
+    public No encontrar(int conteudo) {
+        return encontrar(raiz, conteudo);
     }
 
-    public No remover(int chave) {
-        return remover(raiz, chave);
+    public No remover(int conteudo) {
+        return removerPriv(raiz, conteudo);
     }
 
     // private methods
-    private No inserir(No no, int chave){
+    private No inserirPriv(No no, int conteudo){
         if(no == null) {
-            return new No(chave);
+            return new No(conteudo);
         }
-        if(no.getChave() > chave) {
-            no.setEsquerda(inserir(no.getEsquerda(), chave));
+        if(no.getConteudo() > conteudo) {
+            no.setEsquerda(inserirPriv(no.getEsquerda(), conteudo));
         } else {
-            no.setDireita(inserir(no.getDireita(), chave));
+            no.setDireita(inserirPriv(no.getDireita(), conteudo));
         }
         return no;
     }
 
-    private No encontrar(No no, int chave) {
+    private No encontrar(No no, int conteudo) {
         if(no == null) {
-            return null; // a chave não foi encontrada
+            return null; // o conteúdo não foi encontrada
         }
-        if(no.getChave() == chave) {
-            return no; // a chave foi encontrada
-        } else if (no.getChave() > chave) {
-            return encontrar(no.getEsquerda(), chave);
+        if(no.getConteudo() == conteudo) {
+            return no; // o conteúdo foi encontrada
+        } else if (no.getConteudo() > conteudo) {
+            return encontrar(no.getEsquerda(), conteudo);
         } else {
-            return encontrar(no.getDireita(), chave);
+            return encontrar(no.getDireita(), conteudo);
         }
     }
 
-    private No remover(No no, int chave) {
+    private No removerPriv(No no, int conteudo) {
         if(no == null) {
+            System.out.println("não há oque remover!");
             return null; // o nó não pertence à árvore
         }
-        if(no.getChave() > chave) {
-            no.setEsquerda(remover(no.getEsquerda(), chave));
-        } else if(no.getChave() < chave) {
-            no.setDireita(remover(no.getDireita(), chave));
+        if(conteudo < no.getConteudo()) {
+            no.setEsquerda(removerPriv(no.getEsquerda(), conteudo));
+        } else if(conteudo > no.getConteudo()) {
+            no.setDireita(removerPriv(no.getDireita(), conteudo));
         } else { // encontramos o nó
             // caso 1: nó folha
             if(no.getEsquerda() == null && no.getDireita() == null) {
@@ -82,9 +83,9 @@ public class ArvoreBinaria {
                 return no.getEsquerda();
             }
             // caso 3: nó com dois filhos
-            int chaveSubstituta = getValorMin(no.getDireita());
-            no.setChave(chaveSubstituta);
-            no.setDireita(remover(no.getDireita(),chaveSubstituta));
+            int conteudoAux = getValorMin(no.getDireita());
+            no.setConteudo(conteudoAux);
+            no.setDireita(removerPriv(no.getDireita(), conteudoAux));
         }
         return no;
     }
@@ -98,7 +99,7 @@ public class ArvoreBinaria {
         if(no == null) {
             return;
         }
-        System.out.print(no.getChave() + " ");
+        System.out.print(no.getConteudo() + " ");
         printPreOrdem(no.getEsquerda());
         printPreOrdem(no.getDireita());
     }
@@ -108,7 +109,7 @@ public class ArvoreBinaria {
             return;
         }
         printEmOrdem(no.getEsquerda());
-        System.out.print(no.getChave() + " ");
+        System.out.print(no.getConteudo() + " ");
         printEmOrdem(no.getDireita());
     }
 
@@ -118,6 +119,6 @@ public class ArvoreBinaria {
         }
         printPosOrdem(no.getEsquerda());
         printPosOrdem(no.getDireita());
-        System.out.print(no.getChave() + " ");
+        System.out.print(no.getConteudo() + " ");
     }
 }
