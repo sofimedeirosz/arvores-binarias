@@ -1,19 +1,19 @@
 package minhaBST;
 
 public class No {
-    int chave;
+    int conteudo;
     No esquerda, direita;
     //construtor
-    public No(int chave) {
-        this.chave = chave;
+    public No(int conteudo) {
+        this.conteudo = conteudo;
         this.esquerda = this.direita = null;
     }
     // getters e setters
-    public int getChave() {
-        return chave;
+    public int getConteudo() {
+        return conteudo;
     }
-    public void setChave(int chave) {
-        this.chave = chave;
+    public void setConteudo(int conteudo) {
+        this.conteudo = conteudo;
     }
 
     public No getEsquerda() {
